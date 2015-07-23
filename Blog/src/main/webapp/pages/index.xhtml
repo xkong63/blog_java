@@ -4,14 +4,50 @@
      xmlns:p="http://primefaces.org/ui">   
  <h:head><title>Welcome to blog</title></h:head>  
  <h:body>
+ 
+ <p:layout  fullPage="true">
+    <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+        <h:form> 
+    <p:dataScroller value="#{articleController.articleList}" var="article" chunkSize="10">
+        <f:facet name="header">
+            Scroll Down to Load More Articles
+        </f:facet>
+ 
+        <h:panelGrid columns="1" style="width:100%" columnClasses="logo,detail">
+            
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="1" cellpadding="5">
+                   
+                    
+  
+                        <p:commandLink id="ajax" update="@([id$=currentContent])"  actionListener="#{articleController.showArticle}" >
+        					<h:outputText value="#{article.title}" />
+        					<f:attribute name="article" value="#{article}" />
+    					</p:commandLink>           
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+</h:form>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center">
+        <h:outputText id="currentContent" value="#{articleController.currentArticle.content}" />
+    </p:layoutUnit>
+    
+    <p:layoutUnit position="south">
      <h:form>      
-	     <table> 
+	    
           
-	         <tr>
-		     	<td><p:commandButton id="addBlog" value="Create new blog" action="#{articleController.addBlog}" ajax="false"/></td>
+	         
+		     	<p:commandButton id="addBlog" value="Create new blog" action="#{articleController.addBlog}" />
 		     	
-		     </tr>   
-	     </table>
-     </h:form>      
+		      
+	     
+     </h:form> 
+    </p:layoutUnit>    
+</p:layout>
+     
 </h:body>
 </html> 

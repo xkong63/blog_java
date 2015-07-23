@@ -1,7 +1,16 @@
 package com.blog.model.dao;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.blog.model.Article;
+
+
+@Repository("articleDAO")
+@Transactional
 public class ArticleDAO implements IArticleDAO{
 	private SessionFactory sessionFactory;
 
@@ -13,5 +22,19 @@ public class ArticleDAO implements IArticleDAO{
 		this.sessionFactory = sessionFactory;
 	}
 	
+	public void submitBlog(Article article) {
+		
+		sessionFactory.getCurrentSession().save(article);
+		
+		
+	}
 	
+	public List loadArticles() {
+		
+		
+		return sessionFactory.getCurrentSession().createCriteria(Article.class).list();
+		
+		
+		
+	}
 }

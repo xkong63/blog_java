@@ -1,19 +1,103 @@
 package com.blog.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
+
+import com.blog.model.Article;
+import com.blog.model.service.ArticleService;
+import com.blog.model.service.IArticleService;
 
 
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ArticleController {
+	
+	@ManagedProperty(value="#{ArticleService}")
+	IArticleService articleService = new ArticleService();
+	
+	
+	private List<Article> articleList = new ArrayList<Article>();
+	
+	private String blog_content;
+	
+	private String blog_title;
+	
+	private Article currentArticle;
 
 	public String addBlog() {
 		
 		
-		return "home";
+		return "createBlog";
 	}
 	
+	public String submitBlog() {
+		Article article = new Article();
+		article.setContent(blog_content);
+		article.setTitle(blog_title);
+		articleService.saveArticle(article);
+		return "index";
+	}
+
+	public String getBlog_content() {
+		return blog_content;
+	}
+
+	public void setBlog_content(String blog_content) {
+		this.blog_content = blog_content;
+	}
+
+	public IArticleService getArticleService() {
+		return articleService;
+	}
+
+	public void setArticleService(IArticleService articleService) {
+		this.articleService = articleService;
+	}
+
+	public List<Article> getArticleList() {
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList) {
+		this.articleList = articleList;
+	}
 	
+	@PostConstruct
+	public void loadArticles() {
+		
+		articleList = articleService.loadArticles();
+		
+		
+	}
+
+	public String getBlog_title() {
+		return blog_title;
+	}
+
+	public void setBlog_title(String blog_title) {
+		this.blog_title = blog_title;
+	}
+
+	public Article getCurrentArticle() {
+		return currentArticle;
+	}
+
+	public void setCurrentArticle(Article currentArticle) {
+		this.currentArticle = currentArticle;
+	}
+
+	public void showArticle(ActionEvent event) {
+		
+		this.currentArticle = (Article)event.getComponent().getAttributes().get("article");
+		
+		
+	}
 }
