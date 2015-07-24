@@ -3,6 +3,7 @@ package com.blog.model.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +25,18 @@ public class ArticleDAO implements IArticleDAO{
 	
 	public void submitBlog(Article article) {
 		
+		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		sessionFactory.getCurrentSession().save(article);
-		
-		
+		tx.commit();
+		sessionFactory.getCurrentSession().close();
 	}
 	
 	public List loadArticles() {
 		
-		
-		return sessionFactory.getCurrentSession().createCriteria(Article.class).list();
-		
+		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		List list = sessionFactory.getCurrentSession().createCriteria(Article.class).list();
+		sessionFactory.getCurrentSession().close();
+		return list;
 		
 		
 	}
