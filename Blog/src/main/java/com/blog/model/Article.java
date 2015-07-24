@@ -2,6 +2,7 @@ package com.blog.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Article implements Serializable{
 	private String title;
 	private String content;
 	private String author;
-	private Date updatedate;
+	private Timestamp updatedate;
 	
 
 	public Integer getId() {
@@ -60,10 +61,10 @@ public class Article implements Serializable{
 	}
 	
 	@Column(name="updatedate", unique = true, nullable = true)
-	public Date getUpdatedate() {
+	public Timestamp getUpdatedate() {
 		return updatedate;
 	}
-	public void setUpdatedate(Date updatedate) {
+	public void setUpdatedate(Timestamp updatedate) {
 		this.updatedate = updatedate;
 	}
     

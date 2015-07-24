@@ -2,10 +2,16 @@
      xmlns:h="http://java.sun.com/jsf/html"      
       xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">   
- <h:head><title>Welcome to blog</title></h:head>  
+ <h:head>
+
+ <title>Welcome to blog</title></h:head>  
  <h:body>
  
  <p:layout  fullPage="true">
+ 
+ <p:layoutUnit position="north">
+ 	<h:graphicImage value="../resources/images/banner.jpg" style="width:100%; "  />
+ </p:layoutUnit>
     <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
         <h:form> 
     <p:dataScroller value="#{articleController.articleList}" var="article" chunkSize="10">
@@ -22,7 +28,10 @@
                     
   
                         <p:commandLink id="ajax" update="@([id$=currentContent])"  actionListener="#{articleController.showArticle}" >
-        					<h:outputText value="#{article.title}" />
+        					<h:outputText value="#{article.title}  " />
+        					<h:outputText value="#{article.updatedate}" >
+              					<f:convertDateTime pattern="yyyy-MM-dd" />
+ 							</h:outputText>
         					<f:attribute name="article" value="#{article}" />
     					</p:commandLink>           
                 </h:panelGrid>

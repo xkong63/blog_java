@@ -1,5 +1,7 @@
 package com.blog.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class ArticleController {
 		Article article = new Article();
 		article.setContent(blog_content);
 		article.setTitle(blog_title);
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		article.setUpdatedate(ts);
 		articleService.saveArticle(article);
 		return "index";
 	}
