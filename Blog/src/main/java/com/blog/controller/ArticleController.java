@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
@@ -19,7 +20,7 @@ import com.blog.model.service.IArticleService;
 
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ArticleController {
 	
 	@ManagedProperty(value="#{ArticleService}")
@@ -102,6 +103,31 @@ public class ArticleController {
 		
 		this.currentArticle = (Article)event.getComponent().getAttributes().get("article");
 		
+		
+	}
+	
+	
+	public String editBlog() {
+		
+		
+		return "edit";
+	}
+	
+	public String updateBlog() {
+		
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		currentArticle.setUpdatedate(ts);
+		articleService.saveArticle(currentArticle);
+		return "index";		
+		
+	}
+	
+	public String deleteBlog() {
+		
+
+		articleService.deleteArticle(currentArticle);
+		loadArticles();
+		return "index?faces-redirect=true";		
 		
 	}
 }

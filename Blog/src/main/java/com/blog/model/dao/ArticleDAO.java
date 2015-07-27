@@ -26,7 +26,7 @@ public class ArticleDAO implements IArticleDAO{
 	public void submitBlog(Article article) {
 		
 		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().save(article);
+		sessionFactory.getCurrentSession().saveOrUpdate(article);
 		tx.commit();
 		sessionFactory.getCurrentSession().close();
 	}
@@ -40,4 +40,15 @@ public class ArticleDAO implements IArticleDAO{
 		
 		
 	}
+
+	@Override
+	public void deleteBlog(Article article) {
+		// TODO Auto-generated method stub
+		Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
+		sessionFactory.getCurrentSession().delete(article);
+		tx.commit();
+		sessionFactory.getCurrentSession().close();		
+	}
+	
+	
 }

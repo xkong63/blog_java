@@ -40,4 +40,22 @@ public class ArticleService implements IArticleService{
 		return articleDAO.loadArticles();
 		
 	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean updateArticle(Article article) {
+		// TODO Auto-generated method stub
+		articleDAO.submitBlog(article);
+		return true;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean deleteArticle(Article article) {
+		// TODO Auto-generated method stub
+		articleDAO.deleteBlog(article);
+		return true;
+	}
+	
+	
 }

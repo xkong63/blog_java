@@ -13,4 +13,8 @@
 );
 
 
-alter table ARTICLE modify id int(11) NOT NULL AUTO_INCREMENT; 
+alter table ARTICLE modify id int(11) NOT NULL AUTO_INCREMENT;
+
+alter table ARTICLE modify content TEXT NOT NULL;
+
+alter table ARTICLE modify updatedate DATETIME;

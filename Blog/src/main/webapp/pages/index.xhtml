@@ -1,25 +1,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  
      xmlns:h="http://java.sun.com/jsf/html"      
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:p="http://primefaces.org/ui">   
  <h:head>
 
  <title>Welcome to blog</title></h:head>  
  <h:body>
- 
- <p:layout  fullPage="true">
+ <h:outputStylesheet name="css/style.css" target="head" />
+ <p:layout  fullPage="true" >
  
  <p:layoutUnit position="north">
- 	<h:graphicImage value="../resources/images/banner.jpg" style="width:100%; "  />
+				<ui:insert name="header">
+					<ui:include src="/pages/header.xhtml" />
+				</ui:insert>
  </p:layoutUnit>
-    <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+    <p:layoutUnit position="west" resizable="true"  >
         <h:form> 
-    <p:dataScroller value="#{articleController.articleList}" var="article" chunkSize="10">
+    <p:dataScroller value="#{articleController.articleList}" var="article" chunkSize="10" >
         <f:facet name="header">
             Scroll Down to Load More Articles
         </f:facet>
  
-        <h:panelGrid columns="1" style="width:100%" columnClasses="logo,detail">
+        <h:panelGrid columns="1" style="width:100%" >
             
  
             <p:outputPanel>
@@ -41,21 +44,23 @@
 </h:form>
     </p:layoutUnit>
  
-    <p:layoutUnit position="center">
-        <h:outputText id="currentContent" value="#{articleController.currentArticle.content}" />
-    </p:layoutUnit>
-    
-    <p:layoutUnit position="south">
-     <h:form>      
+    <p:layoutUnit position="center"   resizable="true" style="min-height:1500px;" >
+        <h:outputText id="currentContent" value="#{articleController.currentArticle.content}" escape="false" />
+        
+             <h:form style="position: fixed; bottom: 0px; right: 0px" >      
 	    
-          
+          <h:panelGrid columns="3" >
 	         
 		     	<p:commandButton id="addBlog" value="Create new blog" action="#{articleController.addBlog}" />
-		     	
+		     	<p:commandButton id="editBlog" value="edit blog" action="#{articleController.editBlog}" />
+		     	<p:commandButton id="deleteBlog" value="delete blog" action="#{articleController.deleteBlog}" />
 		      
-	     
+		      
+	     </h:panelGrid>
      </h:form> 
-    </p:layoutUnit>    
+    </p:layoutUnit>
+    
+
 </p:layout>
      
 </h:body>

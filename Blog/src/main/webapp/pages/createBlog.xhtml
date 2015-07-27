@@ -13,8 +13,9 @@
  
     <h3>Write new blog in the textbox blow :</h3>
     <h3>Title :</h3><p:inputText value="#{articleController.blog_title}" />
-    <h3>Content :</h3><p:inputTextarea rows="12" cols="66" value="#{articleController.blog_content}" counter="display" maxlength="50000" counterTemplate="{0} characters remaining." autoResize="false"/>
-    <h:outputText id="display" />
+    <h3>Content :</h3>
+    <p:editor id="editor" widgetVar="editorWidget" value="#{articleController.blog_content}"   maxlength="50000"  />
+    
  	<p:commandButton id="addBlog" value="Submit" action="#{articleController.submitBlog}" ajax="false"/>
 
 </h:form> 

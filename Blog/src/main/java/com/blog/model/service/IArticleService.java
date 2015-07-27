@@ -18,4 +18,9 @@ public interface IArticleService {
 	public boolean saveArticle(Article article);
 	
 	public List loadArticles();
+	
+	public boolean updateArticle(Article article);
+	
+	
+	public boolean deleteArticle(Article article);
 }

@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+     xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">  
+     
+ <h:head><title>edit blog</title></h:head>      
+     
+ <h:body>
+ 
+ 
+<h:form>               
+
+ 
+    <h3>edit blog in the textbox blow :</h3>
+    <h3>Title :</h3><p:inputText value="#{articleController.currentArticle.title}" />
+    <h3>Content :</h3>
+    <p:editor id="editor" widgetVar="editorWidget" value="#{articleController.currentArticle.content}"   maxlength="50000"  />
+    
+ 	<p:commandButton id="addBlog" value="Update" action="#{articleController.updateBlog}" ajax="false"/>
+
+</h:form> 
+ 
+ 
+ </h:body>        
+
+</html>

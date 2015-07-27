@@ -10,4 +10,6 @@ public interface IArticleDAO {
 	
 	
 	public List loadArticles();
+	
+	public void deleteBlog(Article article);
 }
